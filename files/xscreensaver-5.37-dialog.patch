@@ -1,0 +1,38 @@
+--- /home/ccmetz/xscreensaver-5.37/driver/XScreenSaver.ad.in	2017-07-05 12:52:56.000000000 -0500
++++ /home/ccmetz/xscreensaver-5.34/driver/XScreenSaver.ad.in	2016-06-01 14:22:39.000000000 -0500
+@@ -412,23 +402,23 @@
+ !*passwd.passwdFont:		*-helvetica-medium-r-*-*-*-140-*-*-*-iso8859-1
+ *passwd.passwdFont:		*-courier-medium-r-*-*-*-140-*-*-*-iso8859-1
+ 
+-*Dialog.foreground:		#000000
+-*Dialog.background:		#E6E6E6
+-*Dialog.Button.foreground:	#000000
+-*Dialog.Button.background:	#F5F5F5
++*Dialog.foreground:		#999999
++*Dialog.background:		#444444
++*Dialog.Button.foreground:	#999999
++*Dialog.Button.background:	#404040
+ !*Dialog.Button.pointBackground: #EAEAEA
+ !*Dialog.Button.clickBackground: #C3C3C3
+-*Dialog.text.foreground:	#000000
+-*Dialog.text.background:	#FFFFFF
++*Dialog.text.foreground:	#777777
++*Dialog.text.background:	#404040
+ *passwd.thermometer.foreground:	#4464AC
+-*passwd.thermometer.background:	#FFFFFF
+-*Dialog.topShadowColor:		#FFFFFF
+-*Dialog.bottomShadowColor:	#CECECE
++*passwd.thermometer.background:	#444444
++*Dialog.topShadowColor:		#444444
++*Dialog.bottomShadowColor:	#444444
+ *Dialog.logo.width:		210
+ *Dialog.logo.height:		210
+-*Dialog.internalBorderWidth:	24
+-*Dialog.borderWidth:		1
+-*Dialog.shadowThickness:	2
++*Dialog.internalBorderWidth:	0
++*Dialog.borderWidth:		0
++*Dialog.shadowThickness:	1
+ 
+ *passwd.heading.label:		XScreenSaver %s
+ *passwd.body.label:		This screen is locked.
