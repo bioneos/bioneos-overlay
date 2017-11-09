@@ -1,20 +1,19 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 inherit autotools eutils flag-o-matic multilib pam
 
 DESCRIPTION="A modular screen saver and locker for the X Window System"
-HOMEPAGE="http://www.jwz.org/xscreensaver/"
+HOMEPAGE="https://www.jwz.org/xscreensaver/"
 SRC_URI="
 	${HOMEPAGE}${P}.tar.gz
 "
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~sh sparc x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux ~x64-solaris ~x86-solaris"
-IUSE="gdm jpeg new-login opengl pam +perl selinux suid xinerama"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~x64-solaris ~x86-solaris"
+IUSE="gdm jpeg new-login offensive opengl pam +perl selinux suid xinerama"
 
 COMMON_DEPEND="
 	>=gnome-base/libglade-2
@@ -22,6 +21,7 @@ COMMON_DEPEND="
 	media-libs/netpbm
 	x11-apps/appres
 	x11-apps/xwininfo
+	x11-libs/gdk-pixbuf:2[X]
 	x11-libs/gtk+:2
 	x11-libs/libX11
 	x11-libs/libXext
@@ -34,7 +34,7 @@ COMMON_DEPEND="
 	jpeg? ( virtual/jpeg:0 )
 	new-login? (
 		gdm? ( gnome-base/gdm )
-		!gdm? ( || ( x11-misc/lightdm kde-base/kdm ) )
+		!gdm? ( || ( x11-misc/lightdm lxde-base/lxdm ) )
 		)
 	opengl? (
 		virtual/glu
@@ -78,17 +78,19 @@ src_prepare() {
 			configure{,.in} || die
 	fi
 
-	epatch \
-		"${FILESDIR}"/${PN}-5.33-gentoo.patch \
+	eapply \
 		"${FILESDIR}"/${PN}-5.05-interix.patch \
 		"${FILESDIR}"/${PN}-5.20-blurb-hndl-test-passwd.patch \
 		"${FILESDIR}"/${PN}-5.20-test-passwd-segv-tty.patch \
 		"${FILESDIR}"/${PN}-5.20-tests-miscfix.patch \
 		"${FILESDIR}"/${PN}-5.28-comment-style.patch \
 		"${FILESDIR}"/${PN}-5.31-pragma.patch \
+		"${FILESDIR}"/${PN}-5.35-gentoo.patch \
 		"${FILESDIR}"/${PN}-5.37-dialog.patch
 
-	epatch_user
+	use offensive || eapply "${FILESDIR}"/${PN}-5.35-offensive.patch
+
+	eapply_user
 
 	eautoconf
 	eautoheader
