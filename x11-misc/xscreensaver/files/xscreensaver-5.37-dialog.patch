@@ -1,5 +1,5 @@
---- /home/ccmetz/xscreensaver-5.37/driver/XScreenSaver.ad.in	2017-07-05 12:52:56.000000000 -0500
-+++ /home/ccmetz/xscreensaver-5.34/driver/XScreenSaver.ad.in	2016-06-01 14:22:39.000000000 -0500
+--- a/driver/XScreenSaver.ad.in	2017-07-05 12:52:56.000000000 -0500
++++ b/driver/XScreenSaver.ad.in	2016-06-01 14:22:39.000000000 -0500
 @@ -412,23 +402,23 @@
  !*passwd.passwdFont:		*-helvetica-medium-r-*-*-*-140-*-*-*-iso8859-1
  *passwd.passwdFont:		*-courier-medium-r-*-*-*-140-*-*-*-iso8859-1
