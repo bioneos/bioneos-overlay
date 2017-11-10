@@ -65,9 +65,10 @@ DEPEND="
 	x11-proto/xf86miscproto
 	x11-proto/xf86vidmodeproto
 	xinerama? ( x11-proto/xineramaproto )
+	media-gfx/imagemagick
 "
 
-src_prepare() {
+src_prepare() {	
 	sed -i configure.in -e '/^ALL_LINGUAS=/d' || die
 	strip-linguas -i po/
 	export ALL_LINGUAS="${LINGUAS}"
@@ -77,6 +78,12 @@ src_prepare() {
 			-e "/default_l.*1/s:gdmflexiserver -ls:${EPREFIX}/usr/libexec/lightdm/&:" \
 			configure{,.in} || die
 	fi
+
+	# Output from converted xpm file must be named to correctly match the variable used in logo.c src code
+	convert /etc/xscreensaver.png -scale 180x180 logo-180-xpm.xpm
+	convert /etc/xscreensaver.png -scale 180x180 logo-180.gif
+	mv logo-180-xpm.xpm logo-180.xpm
+	mv -f logo-180.* utils/images/
 
 	eapply \
 		"${FILESDIR}"/${PN}-5.05-interix.patch \
