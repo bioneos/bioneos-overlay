@@ -80,10 +80,23 @@ src_prepare() {
 	fi
 
 	# Output from converted xpm file must be named to correctly match the variable used in logo.c src code
-	convert /etc/xscreensaver.png -scale 180x180 logo-180-xpm.xpm
-	convert /etc/xscreensaver.png -scale 180x180 logo-180.gif
-	mv logo-180-xpm.xpm logo-180.xpm
-	mv -f logo-180.* utils/images/
+	if [[ -f /etc/xscreensaver.png ]]; then
+		ewarn "Using custom logo image from: /etc/xscreensaver.png"
+		# NOTE: In order to get the correct naming inside of the XPM, you need to
+		# specify an extra extension and then rename the file.
+		convert /etc/xscreensaver.png -resize 180x180 -gravity center -background "#444444" -extent 180x180 logo-180.xpm.xpm
+		convert /etc/xscreensaver.png -resize 180x180 -gravity center -background "#444444" -extent 180x180 logo-180.gif
+		mv logo-180.xpm.xpm logo-180.xpm
+		mv -f logo-180.* utils/images/
+	else
+		ewarn "If you would like to use the custom logo image capabilities of this ebuild, then"
+		ewarn "you must first place an image into:"
+		ewarn "    /etc/xscreensaver.png"
+		ewarn "This image will be resized to a square image with a gray background to match."
+		ewarn "the logo placement in the dialog box."
+		ewarn ""
+		ewarn "Create the image file, and then rebuild this package to enable."
+	fi
 
 	eapply \
 		"${FILESDIR}"/${PN}-5.05-interix.patch \
