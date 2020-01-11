@@ -6,7 +6,7 @@ DESCRIPTION="Alpha release for the Alcove Backup system"
 HOMEPAGE="https://github.com/bioneos/backup-system"
 
 # Temporary build, until we can rename the Github project:
-SRC_URI="https://files.bioneos.com/pub/alcove-0.0.1.tgz"
+SRC_URI="https://files.bioneos.com/pub/alcove-0.0.2.tgz"
 #SRC_URI="${HOMEPAGE}/archive/${PV}.tar.gz"
 LICENSE="ISC"
 SLOT="0"
@@ -21,7 +21,7 @@ IUSE=""
 
 # In addition to node we really need the 'forever' npm package as well, but
 # cannot easily test for this as a dependency (AFAIK).
-DEPEND=">=net-libs/nodejs-8.0.0[npm]"
+DEPEND=">=net-libs/nodejs-9.3.0[npm]"
 RDEPEND="${DEPEND}"
 
 ##
@@ -45,6 +45,6 @@ src_install() {
 	doins etc/backup/backup.ini.example
 	insinto /etc/backup/machines
 	doins etc/backup/machines/machine.ini.example
-	# TODO: SysV init script
-	#doinitd resources/init.d/alcove
+	# OpenRC init script
+	doinitd resources/openrc/alcove
 }
