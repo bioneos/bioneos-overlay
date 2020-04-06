@@ -1,14 +1,12 @@
 EAPI=6
 
-DESCRIPTION="Alpha release for the Alcove Backup system"
+DESCRIPTION="Alpha pre-release 3 for the Alcove Backup system"
 
-# Will be replaced with a proper homepage once ready for general public
-HOMEPAGE="https://github.com/bioneos/backup-system"
-
-# Temporary build, until we can rename the Github project:
-SRC_URI="https://files.bioneos.com/pub/alcove-0.0.2.tgz"
-#SRC_URI="${HOMEPAGE}/archive/${PV}.tar.gz"
+# Publicly hosted on GitHub
+HOMEPAGE="https://github.com/bioneos/alcove"
+SRC_URI="${HOMEPAGE}/archive/${PV}.tar.gz"
 LICENSE="ISC"
+
 SLOT="0"
 # I am quite certain this system will be stable on most any platforms
 # that have a stable NodeJS install, but as I have no capacity to test
@@ -21,7 +19,7 @@ IUSE=""
 
 # In addition to node we really need the 'forever' npm package as well, but
 # cannot easily test for this as a dependency (AFAIK).
-DEPEND=">=net-libs/nodejs-9.3.0[npm]"
+DEPEND=">=net-libs/nodejs-10.0.0[npm]"
 RDEPEND="${DEPEND}"
 
 ##
@@ -41,10 +39,10 @@ src_install() {
 	insinto /usr/share/${PN}
 	doins -r dist/* || die "doins failed"
 	# Needs change to PN
-	insinto /etc/backup
-	doins etc/backup/backup.ini.example
-	insinto /etc/backup/machines
-	doins etc/backup/machines/machine.ini.example
+	insinto /etc/${PN}
+	doins etc/${PN}/${PN}.ini.example
+	insinto /etc/${PN}/machines
+	doins etc/${PN}/machines/machine.ini.example
 	# OpenRC init script
-	doinitd resources/openrc/alcove
+	doinitd resources/openrc/${PN}
 }
