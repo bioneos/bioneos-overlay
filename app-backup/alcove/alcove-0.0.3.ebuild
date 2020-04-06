@@ -40,9 +40,9 @@ src_install() {
 	doins -r dist/* || die "doins failed"
 	# Needs change to PN
 	insinto /etc/${PN}
-	doins etc/${PN}/${PN}.ini.example
+	doins config/${PN}/${PN}.ini.example
 	insinto /etc/${PN}/machines
-	doins etc/${PN}/machines/machine.ini.example
+	doins config/${PN}/machines/machine.ini.example
 	# OpenRC init script
 	doinitd resources/openrc/${PN}
 }
