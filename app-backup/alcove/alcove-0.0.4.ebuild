@@ -1,6 +1,6 @@
 EAPI=6
 
-DESCRIPTION="Alpha pre-release 3 for the Alcove Backup system"
+DESCRIPTION="Alpha pre-release 4 for the Alcove Backup system"
 
 # Publicly hosted on GitHub
 HOMEPAGE="https://github.com/bioneos/alcove"
